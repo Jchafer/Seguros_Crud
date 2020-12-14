@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="modelo.Seguro" table="seguro">
+        <id column="idSeguro" name="idSeguro" type="integer">
+            <generator class="increment"/>
+        </id>        
+        <component name="nif">
+            <property name="nif"/>
+        </component>
+        <property name="nombre"/>
+        <property name="ape1"/>
+        <property name="ape2"/>
+        <property name="edad"/>        
+        <property name="sexo">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">modelo.Sexo</param>
+                <param name="type">4</param>
+            </type>
+        </property>        
+        <property name="casado" type="boolean"/>
+        <property name="numHijos"/>
+        <property name="embarazada" type="boolean"/>
+        <component name="coberturas">       
+            <property name="oftalmologia"/>
+            <property name="dental"/>
+            <property name="fecundacionInVitro"/>
+        </component>
+        <component name="enfermedades">
+            <property name="corazon" type="boolean"/>
+            <property name="estomacal" type="boolean"/>
+            <property name="rinyones" type="boolean"/>
+            <property name="alergia" type="boolean"/>
+            <property name="nombreAlergia"/>
+        </component>
+        <property name="fechaCreacion"/>       
+        <set name="asistenciasMedicas" cascade="all" inverse="true">
+            <key>
+                <column name="IdSeguro"/>
+            </key>
+            <one-to-many class="modelo.AsistenciaMedica"/>
+        </set>
+    </class>
+</hibernate-mapping>

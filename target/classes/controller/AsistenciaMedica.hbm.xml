@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="modelo.AsistenciaMedica" table="asistenciamedica">
+        <id name="idAsistenciaMedica" type="integer" column="IdAsistenciaMedica">
+            <generator class="increment"/>
+        </id>        
+        <property name="breveDescripcion"/>
+        <property name="lugar"/>
+        <property name="explicacion" type="text"/>
+        <property name="tipoAsistencia">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">modelo.TipoAsistencia</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property name="fecha" type="date"/>
+        <property name="hora" type="time"/>
+        <property name="importe" type="big_decimal"/>
+        <many-to-one name ="seguro">
+            <column name="IdSeguro"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
